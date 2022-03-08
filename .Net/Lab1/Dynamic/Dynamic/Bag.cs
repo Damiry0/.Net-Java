@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dynamic
 {
-    internal class Bag
+    public class Bag
     {
         public List<Item> Items { get; init; }
 
@@ -58,5 +58,18 @@ namespace Dynamic
                 this.Items.Add(new Item(randomWeight, randomValue));
             }
         }
+
+        public override string ToString()
+        {
+            var str = string.Empty;
+            str += "Items: \n";
+            foreach (var item in Items)
+            {
+                str += "Weight:" + item.weight + " Value:" + item.value + " Ratio:" + item.Ratio + "\n";
+            }
+
+            return str;
+        }
+
     }
 }

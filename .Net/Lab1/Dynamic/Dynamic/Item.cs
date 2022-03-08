@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dynamic
 {
-    internal class Item
+    public class Item
     {
         public int weight { get; set; }
         public int value { get; set; }
