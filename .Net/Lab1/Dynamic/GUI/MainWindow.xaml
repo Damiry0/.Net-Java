@@ -67,9 +67,9 @@
         <TextBox Style="{StaticResource TextBoxExtend}" Name="Items"  hc:InfoElement.Title="Number of Items:" hc:InfoElement.Necessary="True" VerticalAlignment="Top" Margin="20,50,505,0"/>
         <TextBox Style="{StaticResource TextBoxExtend}" Name="Capacity" hc:InfoElement.Title="Capacity of backpack:" hc:InfoElement.Necessary="True" VerticalAlignment="Top" Margin="20,150,505,0"/>
         <TextBox Style="{StaticResource TextBoxExtend}" Name="Seed"  hc:InfoElement.Title="Seed:" hc:InfoElement.Necessary="True" VerticalAlignment="Top" Margin="20,250,505,0"/>
-        <Button Style="{StaticResource ButtonPrimary}" Name="buttonCalculate" Content="Calculate" Margin="20,369,0,0" hc:IconElement.Geometry="{StaticResource SuccessGeometry	}" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Green"/>
+        <Button Style="{StaticResource ButtonPrimary}" Name="buttonCalculate" Click="ButtonCalculate_OnClick" Content="Calculate" Margin="20,369,0,0" hc:IconElement.Geometry="{StaticResource SuccessGeometry	}" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Green"/>
         <Button Style="{StaticResource ButtonDanger}" Click="ButtonBase_OnClick" Content="Delete" Margin="203,369,0,0" hc:IconElement.Geometry="{StaticResource DeleteFillCircleGeometry}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92"/>
-        <RichTextBox Margin="385,24,30,50">
+        <RichTextBox Name="RichTextBox" Margin="385,24,30,50">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>

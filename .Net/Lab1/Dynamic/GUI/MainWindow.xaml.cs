@@ -4,6 +4,7 @@ using HandyControl.Tools;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Dynamic;
 using TextBox = HandyControl.Controls.TextBox;
 
 namespace GUI
@@ -67,9 +68,12 @@ namespace GUI
 
         private void ButtonCalculate_OnClick(object sender, RoutedEventArgs e)
         {
-            var bagTarget = new Bag(20);
-           
-            var bagSource = new Bag();
+            var bagTarget = new Bag(Capacity.Text.ConvertToInt());
+            var bagSource = new Bag(Items.Text.ConvertToInt());
+            bagSource.GenerateRandomBackpack(Seed.Text.ConvertToInt());
+            bagTarget.KnapSack(bagSource);
+           // RichTextBox.ClearValue();
+            RichTextBox.AppendText(bagSource.ToString());
         }
     }
 }
