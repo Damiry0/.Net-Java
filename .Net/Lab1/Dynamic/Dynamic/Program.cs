@@ -1,9 +1,9 @@
 ﻿using Dynamic;
 
 Console.WriteLine("Input bag capacity:");
-var bagCapacity = int.Parse(s: Console.ReadLine());
-var bagTarget = new Bag(bagCapacity);
-var bagSource = new Bag(bagCapacity + 20);
+var bagTarget = new Bag(int.Parse(s: Console.ReadLine()));
+Console.WriteLine("Input number of items:");
+var bagSource = new Bag(int.Parse(s: Console.ReadLine()));
 
 Console.WriteLine("Input seed:");
 bagSource.GenerateRandomBackpack(int.Parse(Console.ReadLine()));
