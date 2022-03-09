@@ -8,7 +8,7 @@ namespace Dynamic
 {
     public class Bag
     {
-        public List<Item> Items { get; init; }
+        private List<Item> Items { get; init; }
 
         private int maxSize { get; set; }
         public Bag(int size)
@@ -53,22 +53,16 @@ namespace Dynamic
             
             for (var i = 0; i < this.maxSize; i++)
             {
-                var randomWeight = fixRand.Next(20);
-                var randomValue = fixRand.Next(30);
+                var randomWeight = fixRand.Next(1,20);
+                var randomValue = fixRand.Next(1,30);
                 this.Items.Add(new Item(randomWeight, randomValue));
             }
         }
 
         public override string ToString()
         {
-            var str = string.Empty;
-            str += "Items: \n";
-            foreach (var item in Items)
-            {
-                str += "Weight:" + item.weight + " Value:" + item.value + " Ratio:" + item.Ratio + "\n";
-            }
-
-            return str;
+            var str = "Items: \n";
+            return Items.Aggregate(str, (current, item) => current + ("Weight: " + item.weight + " Value: " + item.value + " Ratio: " + item.Ratio + "\n"));
         }
 
     }
