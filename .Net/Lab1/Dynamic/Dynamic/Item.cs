@@ -11,13 +11,16 @@ namespace Dynamic
         public int weight { get; set; }
         public int value { get; set; }
 
+        public string icon { get; set; }
+
         public float Ratio { get;}
         
-        public Item(int weight, int value)
+        public Item(int weight, int value, string icon)
         {
             this.weight = weight;
             this.value = value;
             this.Ratio = (float)value / (float)weight;
+            this.icon = icon;
         }
 
     }

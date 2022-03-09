@@ -50,19 +50,31 @@ namespace Dynamic
         public void GenerateRandomBackpack(int seed)
         {
             var fixRand = new Random(seed);
+
+            var iconList = new List<string>()
+            {
+                new string("💎"),
+                new string("💍"),
+                new string("💰"),
+                new string("🦄"),
+                new string("💻"),
+                new string("💲"),
+                new string("💩"),
+            };
             
             for (var i = 0; i < this.maxSize; i++)
             {
                 var randomWeight = fixRand.Next(1,20);
                 var randomValue = fixRand.Next(1,30);
-                this.Items.Add(new Item(randomWeight, randomValue));
+                var randomIconIndex = fixRand.Next(1, 7);
+                this.Items.Add(new Item(randomWeight, randomValue,iconList[randomIconIndex]));
             }
         }
 
         public override string ToString()
         {
-            var str = "Items: \n";
-            return Items.Aggregate(str, (current, item) => current + ("Weight: " + item.weight + " Value: " + item.value + " Ratio: " + item.Ratio + "\n"));
+            var str = "";
+            return Items.Aggregate(str, (current, item) => current + ("Item: "+ item.icon + " Weight: " + item.weight + "\n" + "Value: " + item.value + " Ratio: " + item.Ratio + "\n"));
         }
 
     }
