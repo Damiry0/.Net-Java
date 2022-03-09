@@ -63,17 +63,20 @@ namespace GUI
             Items.Clear();
             Seed.Clear();
             Capacity.Clear();
+            RichTextBox.Document.Blocks.Clear();
+            RichTextBoxItems.Document.Blocks.Clear();
         }
 
 
         private void ButtonCalculate_OnClick(object sender, RoutedEventArgs e)
         {
+            if (Items.Text == "" || Seed.Text == "" || Capacity.Text == "") return;
             var bagTarget = new Bag(Capacity.Text.ConvertToInt());
             var bagSource = new Bag(Items.Text.ConvertToInt());
             bagSource.GenerateRandomBackpack(Seed.Text.ConvertToInt());
             bagTarget.KnapSack(bagSource);
-           // RichTextBox.ClearValue();
-           //RichTextBox
+            RichTextBox.Document.Blocks.Clear();
+            RichTextBoxItems.Document.Blocks.Clear();
             RichTextBoxItems.AppendText(bagSource.ToString());
             RichTextBox.AppendText(bagTarget.ToString());
         }
