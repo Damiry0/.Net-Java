@@ -11,6 +11,7 @@
     <FileVersion>1.0.0.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <LangVersion>latest</LangVersion>
+    <ApplicationIcon>backpack_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;Core</DefineConstants>
@@ -18,6 +19,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>TRACE;Core</DefineConstants>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="backpack_icon.ico" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HandyControls" Version="3.3.10" />
   </ItemGroup>

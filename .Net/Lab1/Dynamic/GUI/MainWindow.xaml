@@ -5,29 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Knapsack Problem" 
         WindowStartupLocation="CenterScreen"
         ShowTitle="True"
         Height="450" 
-        Width="800">
+        Width="800"
+        Icon="backpack_icon.ico">
+
     <hc:Window.NonClientAreaContent>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Height="29">
-                <Menu HorizontalAlignment="Left">
-                    <MenuItem Header="Header1">
-                        <MenuItem Header="Header1"/>
-                        <MenuItem Header="Header2"/>
-                    </MenuItem>
-                    <MenuItem Header="Header2">
-                        <MenuItem Header="Header1"/>
-                        <MenuItem Header="Header2"/>
-                    </MenuItem>
-                </Menu>
-            </StackPanel>
             <Button HorizontalAlignment="Right" Grid.Column="1" Click="ButtonConfig_OnClick" Name="ButtonConfig" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryTextBrush}" hc:IconElement.Geometry="{StaticResource ConfigGeometry}"/>
             <Popup AllowsTransparency="True" Grid.Column="1" PlacementTarget="{Binding ElementName=ButtonConfig}" HorizontalOffset="-35" Name="PopupConfig" VerticalOffset="6" StaysOpen="False">
                 <Border Background="{DynamicResource SecondaryRegionBrush}" CornerRadius="4" Margin="16" Effect="{StaticResource EffectShadow2}">
@@ -69,14 +59,25 @@
         <TextBox Style="{StaticResource TextBoxExtend}" Name="Seed"  hc:InfoElement.Title="Seed:" hc:InfoElement.Necessary="True" VerticalAlignment="Top" Margin="20,250,505,0"/>
         <Button Style="{StaticResource ButtonPrimary}" Name="buttonCalculate" Click="ButtonCalculate_OnClick" Content="Calculate" Margin="20,369,0,0" hc:IconElement.Geometry="{StaticResource SuccessGeometry	}" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Green"/>
         <Button Style="{StaticResource ButtonDanger}" Click="ButtonBase_OnClick" Content="Delete" Margin="203,369,0,0" hc:IconElement.Geometry="{StaticResource DeleteFillCircleGeometry}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92"/>
-        <RichTextBox Name="RichTextBox" Margin="385,24,30,50">
+        <RichTextBox Name="RichTextBox" Margin="595,78,20,36">
             <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
+                
             </FlowDocument>
         </RichTextBox>
+        <Label Content="Items" Margin="375,31,0,0" Style="{DynamicResource LabelPrimary}"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <RichTextBox Name="RichTextBoxItems" Margin="375,78,240,35">
+            <FlowDocument>
+                
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="Backpack"  Margin="595,31,0,0" Style="{DynamicResource LabelPrimary}" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+
+
     </Grid>
+
+
 
 
 

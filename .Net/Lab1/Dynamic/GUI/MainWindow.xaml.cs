@@ -73,7 +73,9 @@ namespace GUI
             bagSource.GenerateRandomBackpack(Seed.Text.ConvertToInt());
             bagTarget.KnapSack(bagSource);
            // RichTextBox.ClearValue();
-            RichTextBox.AppendText(bagSource.ToString());
+           //RichTextBox
+            RichTextBoxItems.AppendText(bagSource.ToString());
+            RichTextBox.AppendText(bagTarget.ToString());
         }
     }
 }
