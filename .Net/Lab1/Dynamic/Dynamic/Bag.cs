@@ -8,7 +8,7 @@ namespace Dynamic
 {
     public class Bag
     {
-        private List<Item> Items { get; init; }
+        public List<Item> Items { get; init; }
 
         private int maxSize { get; set; }
         public Bag(int size)
