@@ -38,7 +38,7 @@ Following repository contains some basics concepts and application made in .Net 
 
 # .Net
 ## Lab 1
-Project involved solving [Knapsack Problem](https://en.wikipedia.org/wiki/Knapsack_problem) using any method while creating both console and GUI version of the application. GUI version was made using WPF with [HandyControl](https://github.com/HandyOrg/HandyControl) which containts both light/dark version. Everything was tested with Nunit test using [FluentAssertion](https://github.com/fluentassertions/fluentassertions) for better syntax. Results are shown below:
+Project involved solving [Knapsack Problem](https://en.wikipedia.org/wiki/Knapsack_problem) using any method while creating both console and GUI version of the application. GUI version was made using WPF with [HandyControl](https://github.com/HandyOrg/HandyControl) which containts both light/dark version. Everything was tested with Nunit tests using [FluentAssertion](https://github.com/fluentassertions/fluentassertions) for better syntax. Results are shown down below:
 
 ![photo](https://i.imgur.com/30rTLsk.png)
 
