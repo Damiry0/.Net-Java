@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="MyFilmList" 
         WindowStartupLocation="CenterScreen"
         hc:ThemeManager.RequestedTheme="Dark"
         ShowTitle="True"
@@ -13,7 +13,6 @@
         Width="800">
     <hc:Window.NonClientAreaContent>
         <Grid>
-
 
             <Button HorizontalAlignment="Right" Grid.Column="1" Click="ButtonConfig_OnClick" Name="ButtonConfig" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryTextBrush}" hc:IconElement.Geometry="{StaticResource ConfigGeometry}"/>
             <Popup AllowsTransparency="True" Grid.Column="1" PlacementTarget="{Binding ElementName=ButtonConfig}" HorizontalOffset="-35" Name="PopupConfig" VerticalOffset="6" StaysOpen="False">
@@ -71,9 +70,33 @@
                 <DataGridTextColumn Width="1*" Binding="{Binding Remark}" Header="Remark"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Button" Name="buttonSearchFilm" Click="ButtonSearchFilm_OnClick" HorizontalAlignment="Left" Margin="55,89,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="listBoxMain" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="210,37,260,155"/>
-        <hc:TextBox Name="TextBoxMain" HorizontalAlignment="Left" Margin="55,128,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Image Name="ImagePoster" HorizontalAlignment="Left" Height="210" Margin="570,69,0,0" VerticalAlignment="Top" Width="180"/>
+        <Rectangle hc:BorderElement.Circular="False" RadiusX="25" RadiusY="25"  HorizontalAlignment="Left" Height="434" Margin="-45,0,0,0"  VerticalAlignment="Center" Width="590" RenderTransformOrigin="0.5,0.55">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#1F1C18" Offset="0.0" />
+                    <GradientStop Color="#1F1C18" Offset="1" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Rectangle hc:BorderElement.Circular="False" RadiusX="25" RadiusY="25"  HorizontalAlignment="Left" Height="434" Margin="290,0,0,0"  VerticalAlignment="Center" Width="545" RenderTransformOrigin="0.5,0.55">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#1F1C18" Offset="1"/>
+                    <GradientStop Color="#FFB21F1F" Offset="-0.1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+
+        <Button Style="{StaticResource ButtonPrimary}" Background="#FFB21F1F" Content="Search" Name="buttonSearchFilm" Click="ButtonSearchFilm_OnClick" HorizontalAlignment="Left" Margin="203,232,0,0" VerticalAlignment="Top"/>
+        <ListBox Name="listBoxMain" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="485,29,135,227">
+        </ListBox>
+        <hc:TextBox Name="TextBoxMain" HorizontalAlignment="Left" Margin="24,232,0,0" TextWrapping="Wrap" Text="Input" VerticalAlignment="Top" Width="171"/>
+        <Image  Name="ImagePoster" HorizontalAlignment="Left" Height="230" Margin="309,29,0,0" VerticalAlignment="Top" Width="175"/>
+        <Label Content="MyFilmList" HorizontalAlignment="Left" Margin="24,29,0,0" VerticalAlignment="Top" Background="{x:Null}" FontSize="36" FontFamily="Arial Black"/>
+        <Label Content=" Search films from IMDB, &#xD;&#xA; add them to your favorites &#xD;&#xA; and manage them even offline!" HorizontalAlignment="Left" Margin="24,89,0,0" VerticalAlignment="Top" Height="55" Width="236" FontFamily="Impact" Background="{x:Null}" HorizontalContentAlignment="Left"/>
+        <Separator HorizontalAlignment="Left" Margin="-170,334,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </hc:Window>
