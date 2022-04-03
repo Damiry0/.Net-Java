@@ -28,8 +28,6 @@ namespace FetchAPI
             InitializeComponent();
         }
 
-       
-
         #region Change Theme
         private void ButtonConfig_OnClick(object sender, RoutedEventArgs e) => PopupConfig.IsOpen = true;
 
@@ -76,9 +74,12 @@ namespace FetchAPI
         {
             var searchItem = HttpUtility.UrlEncode(TextBoxMain.Text);
             await getResponceTask(searchItem);
-            listBoxMain.Items.Clear();
-            listBoxMain.Items.Add(movies);
-            DisplayPoster();
+            if (movies != null)
+            {
+                listBoxMain.Items.Clear();
+                listBoxMain.Items.Add(movies);
+                DisplayPoster();
+            }
         }
 
         private async Task<string> getResponceTask(string request)
