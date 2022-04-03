@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MyFilmList" 
         Icon="Images/logo.ico"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         hc:ThemeManager.RequestedTheme="Dark"
         ShowTitle="True"
