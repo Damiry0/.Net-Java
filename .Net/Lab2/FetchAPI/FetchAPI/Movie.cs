@@ -43,7 +43,13 @@ namespace FetchAPI
 
         public override string ToString()
         {
-            return $"{Title} + {Year}";
+            return $"Title: {Title} \n" +
+                   $"Year: {Year}  \n" +
+                   $"Runtime: {Runtime}  \n" +
+                   $"Genre:  {Genre}  \n" +
+                   $"Country:  {Country}  \n" +
+                   $"BoxOffice:  {BoxOffice}  \n" +
+                   $"Actors:  {Actors}  \n" ;
         }
 
        
