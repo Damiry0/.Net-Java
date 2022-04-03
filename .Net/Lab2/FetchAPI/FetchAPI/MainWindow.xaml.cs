@@ -73,8 +73,10 @@ namespace FetchAPI
         private async void ButtonSearchFilm_OnClick(object sender, RoutedEventArgs e)
         {
             var searchItem = HttpUtility.UrlEncode(TextBoxMain.Text);
-            await getResponceTask(searchItem);
-            if (movies != null)
+            var searchYear = HttpUtility.UrlEncode(TextBoxYear.Text);
+            var searchType = HttpUtility.UrlEncode(ComboBoxType.Text);
+            await getResponceTask(searchItem,searchYear,searchType);
+            if (movies != null) // TODO broken exception handling
             {
                 GridMain.Visibility = Visibility.Visible;
               //  BackGroundRectangle.Opacity = 0.1;
@@ -86,10 +88,10 @@ namespace FetchAPI
             }
         }
 
-        private async Task<string> getResponceTask(string request)
+        private async Task<string> getResponceTask(string tittle,string year,string type)
         {
             var client = new HttpClient();
-            string call = $"http://www.omdbapi.com/?t={request}&apikey=82c88151";
+            string call = $"http://www.omdbapi.com/?t={tittle}&y={year}&type={type}&apikey=82c88151";
 
             var responce = await client.GetStringAsync(call);
             movies = JsonConvert.DeserializeObject<Movie>(responce);
@@ -116,6 +118,11 @@ namespace FetchAPI
                 TextWrapping = TextWrapping.WrapWithOverflow,
                 FontSize = 14,
             };
+        }
+
+        private void ButtonShowList_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

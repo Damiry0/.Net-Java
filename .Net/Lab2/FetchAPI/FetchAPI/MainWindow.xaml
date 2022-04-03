@@ -100,7 +100,7 @@
 
 
         <Button Style="{StaticResource ButtonPrimary}" Background="#FFB21F1F" Content="Search" Name="buttonSearchFilm" Click="ButtonSearchFilm_OnClick" HorizontalAlignment="Left" Margin="203,232,0,0" VerticalAlignment="Top"/>
-        <hc:SearchBar Name="TextBoxMain" HorizontalAlignment="Left" Margin="24,232,0,0" TextWrapping="Wrap" Text="Search by title" VerticalAlignment="Top" Width="171"/>
+        <hc:SearchBar hc:InfoElement.Necessary="True" Name="TextBoxMain" HorizontalAlignment="Left" Margin="24,232,0,0" TextWrapping="Wrap" hc:InfoElement.Placeholder="Please enter title"  VerticalAlignment="Top" Width="171"/>
         <Image  Name="ImagePoster" HorizontalAlignment="Left" Height="230" Margin="309,29,0,0" VerticalAlignment="Top" Width="175"/>
         <Label Content="MyFilmList" HorizontalAlignment="Left" Margin="24,29,0,0" VerticalAlignment="Top" Background="{x:Null}" FontSize="36" FontFamily="Arial Black"/>
         <Label Content=" Search films from IMDB, &#xD;&#xA; add them to your favorites &#xD;&#xA; and manage them even offline!" HorizontalAlignment="Left" Margin="24,89,0,0" VerticalAlignment="Top" Height="55" Width="236" FontFamily="Impact" Background="{x:Null}" HorizontalContentAlignment="Left"/>
@@ -121,7 +121,23 @@
                 </Label.Content>
             </Label>
         </Grid>
-        
+        <Button  Style="{StaticResource ButtonPrimary}" Background="#FFB21F1F" Content="Show MyList" x:Name="buttonShowList" Click="ButtonShowList_OnClick" HorizontalAlignment="Left" Margin="24,374,0,0" VerticalAlignment="Top" Width="171"/>
+        <hc:TextBox x:Name="TextBoxYear" HorizontalAlignment="Left" Margin="24,274,0,0" TextWrapping="Wrap" hc:InfoElement.Placeholder="Please enter year" VerticalAlignment="Top" Width="171"/>
+        <ComboBox Name="ComboBoxType" ItemsSource="{Binding DataList}" hc:InfoElement.Placeholder="Please enter type"  Style="{StaticResource ComboBoxExtend}" Margin="24,316,605,30" RenderTransformOrigin="0.5,0.5">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+            <ComboBoxItem Content="movie"/>
+            <ComboBoxItem Content="series"/>
+            <ComboBoxItem Content="episode"/>
+        </ComboBox>
+
+
 
 
     </Grid>
