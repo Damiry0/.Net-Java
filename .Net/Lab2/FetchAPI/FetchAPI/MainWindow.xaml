@@ -97,6 +97,8 @@
         <Label Content="MyFilmList" HorizontalAlignment="Left" Margin="24,29,0,0" VerticalAlignment="Top" Background="{x:Null}" FontSize="36" FontFamily="Arial Black"/>
         <Label Content=" Search films from IMDB, &#xD;&#xA; add them to your favorites &#xD;&#xA; and manage them even offline!" HorizontalAlignment="Left" Margin="24,89,0,0" VerticalAlignment="Top" Height="55" Width="236" FontFamily="Impact" Background="{x:Null}" HorizontalContentAlignment="Left"/>
         <Separator HorizontalAlignment="Left" Margin="-170,334,0,0" VerticalAlignment="Top"/>
+        <hc:Rate Value="5" AllowHalf="True" ShowText="True"  Margin="490,230,0,0" Background="DarkRed" />
+        <hc:Rate Count="1" AllowHalf="False" ShowText="False"  Margin="684,230,0,0" Background="Gold" />
 
     </Grid>
 </hc:Window>
