@@ -20,9 +20,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="background.jpg" />
+    <None Remove="Images\background.jpg" />
+    <None Remove="Images\IMDB.png" />
+    <None Remove="Images\Metascore.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HandyControls" Version="3.3.10" />
@@ -31,5 +31,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background.jpg" />
+    <Resource Include="Images\IMDB.png" />
+    <Resource Include="Images\Metascore.png" />
   </ItemGroup>
 </Project>
