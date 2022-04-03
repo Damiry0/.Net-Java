@@ -88,17 +88,30 @@
             </Rectangle.Fill>
         </Rectangle>
 
+        <Rectangle hc:BorderElement.Circular="False" RadiusX="25" RadiusY="25"  HorizontalAlignment="Left" Height="434" Margin="290,0,0,0"  VerticalAlignment="Center" Width="545" RenderTransformOrigin="0.5,0.55">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="background.jpg" Opacity="0.3">
+                </ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
 
         <Button Style="{StaticResource ButtonPrimary}" Background="#FFB21F1F" Content="Search" Name="buttonSearchFilm" Click="ButtonSearchFilm_OnClick" HorizontalAlignment="Left" Margin="203,232,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="listBoxMain" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="485,29,135,227">
-        </ListBox>
-        <hc:TextBox Name="TextBoxMain" HorizontalAlignment="Left" Margin="24,232,0,0" TextWrapping="Wrap" Text="Input" VerticalAlignment="Top" Width="171"/>
+        <hc:SearchBar Name="TextBoxMain" HorizontalAlignment="Left" Margin="24,232,0,0" TextWrapping="Wrap" Text="Search by title" VerticalAlignment="Top" Width="171"/>
         <Image  Name="ImagePoster" HorizontalAlignment="Left" Height="230" Margin="309,29,0,0" VerticalAlignment="Top" Width="175"/>
         <Label Content="MyFilmList" HorizontalAlignment="Left" Margin="24,29,0,0" VerticalAlignment="Top" Background="{x:Null}" FontSize="36" FontFamily="Arial Black"/>
         <Label Content=" Search films from IMDB, &#xD;&#xA; add them to your favorites &#xD;&#xA; and manage them even offline!" HorizontalAlignment="Left" Margin="24,89,0,0" VerticalAlignment="Top" Height="55" Width="236" FontFamily="Impact" Background="{x:Null}" HorizontalContentAlignment="Left"/>
         <Separator HorizontalAlignment="Left" Margin="-170,334,0,0" VerticalAlignment="Top"/>
-        <hc:Rate Value="5" AllowHalf="True" ShowText="True"  Margin="490,230,0,0" Background="DarkRed" />
-        <hc:Rate Count="1" AllowHalf="False" ShowText="False"  Margin="684,230,0,0" Background="Gold" />
+
+        <Grid Name="GridMain" Visibility="Hidden">
+            <ListBox Name="listBoxMain" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="485,29,85,227"></ListBox>
+            <Rectangle HorizontalAlignment="Left" Height="32" Margin="485,230,0,0"  VerticalAlignment="Top" Fill="#1F1C18" Width="230"/>
+            <hc:Rate Value="5" AllowHalf="True" ShowText="True"  Margin="500,235,0,0" Background="DarkRed" />
+            <hc:Rate Count="1" AllowHalf="False" ShowText="False"  Margin="685,235,0,0" Background="Gold" />
+        </Grid>
+
+
+        
 
     </Grid>
 </hc:Window>

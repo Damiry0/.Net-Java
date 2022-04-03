@@ -76,6 +76,7 @@ namespace FetchAPI
             await getResponceTask(searchItem);
             if (movies != null)
             {
+                GridMain.Visibility = Visibility.Visible;
                 listBoxMain.Items.Clear();
                 listBoxMain.Items.Add(movies);
                 DisplayPoster();

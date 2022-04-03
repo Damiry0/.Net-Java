@@ -19,6 +19,12 @@
     <DefineConstants>TRACE;Core</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="HandyControls" Version="3.3.10" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
       <PrivateAssets>all</PrivateAssets>
