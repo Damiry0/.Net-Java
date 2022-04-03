@@ -110,8 +110,12 @@ namespace FetchAPI
         {
             SimpleTextImdbRating.Text = movies.imdbRating;
             SimpleTextMetascoreRating.Text = movies.Metascore;
+            MovieDescription.Content = new TextBlock()
+            {
+                Text = movies.Plot,
+                TextWrapping = TextWrapping.WrapWithOverflow,
+                FontSize = 14,
+            };
         }
-
-        
     }
 }

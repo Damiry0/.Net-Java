@@ -6,11 +6,13 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         Title="MyFilmList" 
+        Icon="Images/logo.ico"
         WindowStartupLocation="CenterScreen"
         hc:ThemeManager.RequestedTheme="Dark"
         ShowTitle="True"
         Height="450" 
         Width="800">
+
     <hc:Window.NonClientAreaContent>
         <Grid>
 
@@ -104,18 +106,22 @@
         <Separator HorizontalAlignment="Left" Margin="-170,334,0,0" VerticalAlignment="Top"/>
 
         <Grid Name="GridMain" Visibility="Hidden">
-            <ListBox Name="listBoxMain" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="485,29,85,227"></ListBox>
+            <ListBox Name="listBoxMain" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="310,267,325,10" Opacity="0.7"></ListBox>
             <Rectangle HorizontalAlignment="Left" Height="32" Margin="485,230,0,0"  VerticalAlignment="Top" Fill="#1F1C18" Width="230"/>
             <hc:Rate Value="5" AllowHalf="True" ShowText="True"  Margin="500,235,0,0" Background="DarkRed" />
             <hc:Rate Count="1" AllowHalf="False" ShowText="False"  Margin="685,235,0,0" Background="Gold" />
-            
             <Image Name="Imdb" Source="Images/IMDB.png" HorizontalAlignment="Center" Height="41" Margin="250,299,0,0" VerticalAlignment="Top" Width="70"/>
             <Image Name="Metascore" Source="Images/Metascore.png" HorizontalAlignment="Left" Height="35" Margin="642,299,0,0" VerticalAlignment="Top" Width="70"/>
             <hc:SimpleText Name="SimpleTextImdbRating" HorizontalAlignment="Left" Height="29" Margin="565,300,0,0" VerticalAlignment="Top" Width="75"  FontFamily="Arial Black" FontSize="16" Foreground="White" Opacity="0.7"/>
             <hc:SimpleText Name="SimpleTextMetascoreRating" HorizontalAlignment="Left" Height="29" Margin="682,300,0,0" VerticalAlignment="Top" Width="76"  FontFamily="Arial Black" FontSize="16" Foreground="White" Opacity="0.7"/>
-
-
+            <Label Name="MovieDescription"  HorizontalAlignment="Left" Margin="485,29,0,0" VerticalAlignment="Top" Height="188" Width="290" Opacity="0.7">
+                <Label.Content>
+                    <AccessText TextWrapping="Wrap" />
+                </Label.Content>
+            </Label>
         </Grid>
+        
+
 
     </Grid>
 </hc:Window>

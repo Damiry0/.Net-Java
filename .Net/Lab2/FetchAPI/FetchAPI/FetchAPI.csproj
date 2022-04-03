@@ -22,6 +22,7 @@
     <None Remove="background.jpg" />
     <None Remove="Images\background.jpg" />
     <None Remove="Images\IMDB.png" />
+    <None Remove="Images\logo.ico" />
     <None Remove="Images\Metascore.png" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +36,7 @@
   <ItemGroup>
     <Resource Include="Images\background.jpg" />
     <Resource Include="Images\IMDB.png" />
+    <Resource Include="Images\logo.ico" />
     <Resource Include="Images\Metascore.png" />
   </ItemGroup>
 </Project>
