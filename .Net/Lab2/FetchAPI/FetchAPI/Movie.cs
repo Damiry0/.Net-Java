@@ -34,7 +34,7 @@ namespace FetchAPI
 
         public string Poster { get; set; }
 
-
+        public string Metascore { get; set; }
         public string imdbRating { get; set; }
 
         public string imdbVotes { get; set; }

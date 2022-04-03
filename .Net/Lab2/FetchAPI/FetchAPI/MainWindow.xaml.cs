@@ -77,9 +77,12 @@ namespace FetchAPI
             if (movies != null)
             {
                 GridMain.Visibility = Visibility.Visible;
+              //  BackGroundRectangle.Opacity = 0.1;
+                BackGroundRectangle1.Opacity = 0.2;
                 listBoxMain.Items.Clear();
                 listBoxMain.Items.Add(movies);
                 DisplayPoster();
+                DisplayRanking();
             }
         }
 
@@ -93,7 +96,7 @@ namespace FetchAPI
             return responce;
         }
 
-        public void DisplayPoster()
+        private void DisplayPoster()
         {
             var image = new Image();
             BitmapImage bitmap = new BitmapImage();
@@ -102,6 +105,13 @@ namespace FetchAPI
             bitmap.EndInit();
             ImagePoster.Source = bitmap;
         }
+
+        private void DisplayRanking()
+        {
+            SimpleTextImdbRating.Text = movies.imdbRating;
+            SimpleTextMetascoreRating.Text = movies.Metascore;
+        }
+
         
     }
 }
