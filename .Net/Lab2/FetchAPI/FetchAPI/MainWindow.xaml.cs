@@ -14,6 +14,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FetchAPI.Pages;
+using HandyControl.Data;
 using Newtonsoft.Json;
 using TextBox = HandyControl.Controls.TextBox;
 
@@ -23,9 +25,13 @@ namespace FetchAPI
     {
 
         public Movie movies { get; set; }
+
+        public Films films { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            films = new Films();
+            films.SaveChanges();
         }
 
         #region Change Theme
@@ -122,7 +128,12 @@ namespace FetchAPI
 
         private void ButtonShowList_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            frame.NavigationService.Navigate(new Page1());
+        }
+
+        private void RateControl_OnValueChanged(object? sender, FunctionEventArgs<double> e)
+        {
+            films.Add(movies);
         }
     }
 }
