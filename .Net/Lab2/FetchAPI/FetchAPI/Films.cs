@@ -14,7 +14,7 @@ namespace FetchAPI
 	public class Films : DbContext
 	{
 		public virtual DbSet<Movie> Movies { get; set; }
-		protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite(@"Data Source=Univ.db");
+		protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite(@"Data Source=Films.db");
 
 		
 

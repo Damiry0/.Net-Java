@@ -109,8 +109,8 @@
         <Grid Name="GridMain" Visibility="Hidden">
             <ListBox Name="listBoxMain" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="310,267,325,10" Opacity="0.7"></ListBox>
             <Rectangle HorizontalAlignment="Left" Height="32" Margin="485,230,0,0"  VerticalAlignment="Top" Fill="#1F1C18" Width="230"/>
-            <hc:Rate Value="5" AllowHalf="True" ShowText="True"  Margin="500,235,0,0" Background="DarkRed" />
-            <hc:Rate Count="1" AllowHalf="False" ShowText="False"  Margin="685,235,0,0" Background="Gold" />
+            <hc:Rate Name="RateControl" ValueChanged="RateControl_OnValueChanged"  AllowHalf="True" ShowText="True"  Margin="500,235,0,0" Background="DarkRed" />
+            <hc:Rate Name="FavouriteControl" Count="1" AllowHalf="False" ShowText="False"  Margin="685,235,0,0" Background="Gold" />
             <Image RenderOptions.BitmapScalingMode="HighQuality" Name="Imdb" Source="Images/IMDB.png" HorizontalAlignment="Center" Height="41" Margin="250,299,0,0" VerticalAlignment="Top" Width="70"/>
             <Image RenderOptions.BitmapScalingMode="HighQuality" Name="Metascore" Source="Images/Metascore.png" HorizontalAlignment="Left" Height="35" Margin="642,299,0,0" VerticalAlignment="Top" Width="70"/>
             <hc:SimpleText Name="SimpleTextImdbRating" HorizontalAlignment="Left" Height="29" Margin="565,300,0,0" VerticalAlignment="Top" Width="75"  FontFamily="Arial Black" FontSize="16" Foreground="White" Opacity="0.7"/>
@@ -136,5 +136,7 @@
             <ComboBoxItem Content="series"/>
             <ComboBoxItem Content="episode"/>
         </ComboBox>
+        <Frame Name="frame"  Margin="290,0,0,0" NavigationUIVisibility="Hidden"/>
+
     </Grid>
 </hc:Window>
