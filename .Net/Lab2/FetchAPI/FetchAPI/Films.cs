@@ -15,10 +15,9 @@ namespace FetchAPI
 	{
         public Films()
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
-		public virtual DbSet<Movie> Movies { get; set; }
+		public virtual DbSet<Movie> Movies { get; init; }
 		protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite(@"Data Source=Films.db");
 
 		
@@ -31,28 +30,21 @@ namespace FetchAPI
 			}
 		}
 
-		public static Films Show()
+		public Films Show()
         {
 			using (Films context = new Films())
 			{
 				var movies = context.Movies;
-				/*(Movies mv in movies)
-				{
-					Console.WriteLine("ID: {0}, Title: {1}", mv.Id, mv.Title);
-				}*/
+
 				return new Films() { Movies = movies };
 			}
 		}
 
-		public static Films FindByYear(string year)
+		public Films FindByYear(string year)
         {
 			using (Films context = new Films())
 			{
 				var movies = context.Movies.Where(m => m.Year == year);
-                /*(Movies mv in movies)
-				{
-					Console.WriteLine("ID: {0}, Title: {1}", mv.Id, mv.Title);
-				}*/
                 return new Films() { Movies = (DbSet<Movie>)movies };
 			}
 		}

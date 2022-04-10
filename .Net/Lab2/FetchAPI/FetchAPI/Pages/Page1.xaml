@@ -11,7 +11,8 @@
 
     <Grid>
 
-        <hc:Clock HorizontalAlignment="Left" Margin="35,25,0,0" VerticalAlignment="Top"/>
+
+        <DataGrid Name="gridFilms"   d:ItemsSource="{Binding}"/>
 
     </Grid>
 </Page>

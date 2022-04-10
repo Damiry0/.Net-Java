@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Policy;
@@ -18,6 +19,8 @@ using FetchAPI.Pages;
 using HandyControl.Data;
 using Newtonsoft.Json;
 using TextBox = HandyControl.Controls.TextBox;
+using FetchAPI.Pages;
+using HandyControl.Tools.Extension;
 
 namespace FetchAPI
 {
@@ -27,10 +30,13 @@ namespace FetchAPI
         public Movie movies { get; set; }
 
         public Films films { get; set; }
+
+        public Page1 MyFilmList { get; set; }
         public MainWindow()
         {
             InitializeComponent();
             films = new Films();
+            MyFilmList = new Page1();
             films.SaveChanges();
         }
 
@@ -82,6 +88,7 @@ namespace FetchAPI
             var searchYear = HttpUtility.UrlEncode(TextBoxYear.Text);
             var searchType = HttpUtility.UrlEncode(ComboBoxType.Text);
             await getResponceTask(searchItem,searchYear,searchType);
+            MyFilmList.Hide();
             if (movies != null) // TODO broken exception handling
             {
                 GridMain.Visibility = Visibility.Visible;
@@ -128,7 +135,9 @@ namespace FetchAPI
 
         private void ButtonShowList_OnClick(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(new Page1());
+            frame.NavigationService.Navigate(MyFilmList);
+            MyFilmList.Show();
+            MyFilmList.gridFilms.ItemsSource = films.Movies.ToList();
         }
 
         private void RateControl_OnValueChanged(object? sender, FunctionEventArgs<double> e)
