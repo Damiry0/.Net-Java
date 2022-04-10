@@ -83,6 +83,9 @@ namespace FetchAPI
                 BackGroundRectangle1.Opacity = 0.2;
                 listBoxMain.Items.Clear();
                 listBoxMain.Items.Add(movies);
+                var context = new Films();
+                context.Movies.Add(movies);
+                context.SaveChanges();
                 DisplayPoster();
                 DisplayRanking();
             }
