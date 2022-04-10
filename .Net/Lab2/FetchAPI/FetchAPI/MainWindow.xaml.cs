@@ -105,7 +105,6 @@ namespace FetchAPI
         {
             var client = new HttpClient();
             string call = $"http://www.omdbapi.com/?t={tittle}&y={year}&type={type}&apikey=82c88151";
-
             var responce = await client.GetStringAsync(call);
             movies = JsonConvert.DeserializeObject<Movie>(responce);
             return responce;
@@ -143,7 +142,12 @@ namespace FetchAPI
         private void RateControl_OnValueChanged(object? sender, FunctionEventArgs<double> e)
         {
             movies.UserRating = RateControl.Value + "/5";
-            films.Add(movies);
+            if(!films.Exist(movies)) films.Add(movies);
+            else
+            {
+                var item = films.Movies.SingleOrDefault((x => x.Title == movies.Title));
+                item.UserRating =  RateControl.Value + "/5";
+            }
         }
     }
 }

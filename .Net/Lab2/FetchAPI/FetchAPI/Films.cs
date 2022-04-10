@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.EntityFrameworkCore.Sqlite;
-//using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace FetchAPI
@@ -47,6 +46,12 @@ namespace FetchAPI
                 return new Films() { Movies = (DbSet<Movie>)movies };
 			}
 		}
+
+        public bool Exist(Movie movie)
+        {
+            return Movies.Any(x => x.Title == movie.Title);
+        }
+
 
 	}
 }
