@@ -24,11 +24,10 @@ namespace FetchAPI
 
 		public void Add(Movie movie)
         {
-			using (Films context = new Films()) {
-				context.Movies.Add(movie);
-				context.SaveChanges();
-			}
-		}
+            using Films context = new Films();
+            context.Movies.Add(movie);
+            context.SaveChanges();
+        }
 
 		public Films Show()
         {
