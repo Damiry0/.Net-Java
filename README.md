@@ -43,7 +43,10 @@ Project involved solving [Knapsack Problem](https://en.wikipedia.org/wiki/Knapsa
 ![photo](https://i.imgur.com/30rTLsk.png)
 
 ## Lab 2
+Project involved fetching data from WebAPI, parsing it and saving to EF database.
+Results are shown down below:
 
+![photo](https://i.imgur.com/nhcLlrB.png)
 ## Lab 3
 
 ## Lab 4
