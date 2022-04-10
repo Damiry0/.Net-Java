@@ -10,9 +10,25 @@
       Title="Page1">
 
     <Grid>
+        <Rectangle hc:BorderElement.Circular="False" RadiusX="25" RadiusY="25"  HorizontalAlignment="Left" Height="434" Margin="0,0,0,0"  VerticalAlignment="Center" Width="950" RenderTransformOrigin="0.5,0.55">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#1F1C18" Offset="0.0" />
+                    <GradientStop Color="#1F1C18" Offset="1" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
 
+        <Rectangle Name="BackGroundRectangle1"  hc:BorderElement.Circular="False" RadiusX="25" RadiusY="25"  HorizontalAlignment="Left" Height="434" Margin="0,0,0,0"  VerticalAlignment="Center" Width="545" RenderTransformOrigin="0.5,0.55">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#1F1C18" Offset="1"/>
+                    <GradientStop Color="#FFB21F1F" Offset="-0.1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
 
-        <DataGrid Name="gridFilms"   d:ItemsSource="{Binding}"/>
+        <DataGrid Name="gridFilms" Opacity="0.8" d:ItemsSource="{Binding}"/> 
 
     </Grid>
 </Page>
