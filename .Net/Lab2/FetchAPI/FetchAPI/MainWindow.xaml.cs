@@ -89,7 +89,7 @@ namespace FetchAPI
             var searchType = HttpUtility.UrlEncode(ComboBoxType.Text);
             await getResponceTask(searchItem,searchYear,searchType);
             MyFilmList.Hide();
-            if (movies != null) // TODO broken exception handling
+            if (movies.Response=="True") 
             {
                 GridMain.Visibility = Visibility.Visible;
               //  BackGroundRectangle.Opacity = 0.1;
@@ -142,6 +142,7 @@ namespace FetchAPI
 
         private void RateControl_OnValueChanged(object? sender, FunctionEventArgs<double> e)
         {
+            movies.UserRating = RateControl.Value + "/5";
             films.Add(movies);
         }
     }

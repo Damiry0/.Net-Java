@@ -20,6 +20,9 @@ namespace FetchAPI
         public int Id { get; set; } 
         [Column("Title")]
         public string Title { get; set; }
+        [Column("UserRating")]
+        public string UserRating { get; set; }
+
         [Column("Year")]
 
         public string Year { get; set; }
@@ -64,6 +67,8 @@ namespace FetchAPI
         [Column("BoxOffice")]
 
         public string BoxOffice { get; set; }
+
+        public string Response { get; set; }
 
         public override string ToString()
         {
