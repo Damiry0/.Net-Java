@@ -92,7 +92,17 @@ namespace FetchAPI
             GridMain.Visibility = Visibility.Visible;
             BackGroundRectangle1.Opacity = 0.2;
             listBoxMain.Items.Clear();
-            listBoxMain.Items.Add(movies);
+            if (!films.Exist(movies))
+            {
+                listBoxMain.Items.Add(movies);
+            }
+            else
+            {
+                var item = films.Movies.SingleOrDefault((x => x.Title == movies.Title));
+                listBoxMain.Items.Add(item);
+                var value = item.UserRating.Remove(item.UserRating.Length - 2);
+                RateControl.Value = int.Parse(value);
+            }
             DisplayPoster();
             DisplayRanking();
         }
