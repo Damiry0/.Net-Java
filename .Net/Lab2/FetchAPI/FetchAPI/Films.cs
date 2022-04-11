@@ -12,16 +12,14 @@ using Newtonsoft.Json;
 
 namespace FetchAPI
 {
-	public class Films : DbContext
+	public sealed class Films : DbContext
 	{
         public Films()
         {
             Database.EnsureCreated();
         }
-		public virtual DbSet<Movie> Movies { get; init; }
+		public DbSet<Movie> Movies { get; init; }
 		protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite(@"Data Source=Films.db");
-
-		
 
 		public void Add(Movie movie)
         {
@@ -39,7 +37,7 @@ namespace FetchAPI
         public List<MovieSimplified> ShowSimplified()
         {
             using Films context = new Films();
-            var fullList=  (from m in context.Movies select m).ToList();
+            var fullList=(from m in context.Movies select m).ToList();
             var serialized = JsonConvert.SerializeObject(fullList);
             return JsonConvert.DeserializeObject<List<MovieSimplified>>(serialized);
         }
@@ -67,7 +65,5 @@ namespace FetchAPI
         {
             return Movies.Any(x => x.Title == movie.Title);
         }
-
-
-	}
+    }
 }
