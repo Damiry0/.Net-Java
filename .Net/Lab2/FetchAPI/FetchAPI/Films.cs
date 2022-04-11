@@ -37,11 +37,33 @@ namespace FetchAPI
 			}
 		}
 
-		public List<Movie> FindByYear(string year)
+		public List<Movie> FindBy(string What, string key)
 		{
 			using (Films context = new Films())
 			{
-				return (from m in context.Movies where m.Year == year select m).ToList<Movie>();
+				switch (What)
+				{
+					case "Year":
+						return (from m in context.Movies where m.Year == key select m).ToList<Movie>();
+					case "Rated":
+						return (from m in context.Movies where m.Rated == key select m).ToList<Movie>();
+					case "Released":
+						return (from m in context.Movies where m.Released == key select m).ToList<Movie>();
+					case "Runtime":
+						return (from m in context.Movies where m.Runtime == key select m).ToList<Movie>();
+					case "Genre":
+						return (from m in context.Movies where m.Genre == key select m).ToList<Movie>();
+					case "Writer":
+						return (from m in context.Movies where m.Writer == key select m).ToList<Movie>();
+					case "Actors":
+						return (from m in context.Movies where m.Actors == key select m).ToList<Movie>();
+					case "Country":
+						return (from m in context.Movies where m.Country == key select m).ToList<Movie>();
+					case "Awards":
+						return (from m in context.Movies where m.Awards == key select m).ToList<Movie>();
+						default:	
+						return null;
+				}
 			}
 		}
 
