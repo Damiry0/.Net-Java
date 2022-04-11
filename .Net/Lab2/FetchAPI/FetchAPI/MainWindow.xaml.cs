@@ -26,12 +26,11 @@ namespace FetchAPI
 {
     public partial class MainWindow
     {
+        private Movie movies { get; set; }
 
-        public Movie movies { get; set; }
+        private Films films { get;}
 
-        public Films films { get; set; }
-
-        public Page1 MyFilmList { get; set; }
+        private Page1 MyFilmList { get;}
         public MainWindow()
         {
             InitializeComponent();
@@ -89,16 +88,13 @@ namespace FetchAPI
             var searchType = HttpUtility.UrlEncode(ComboBoxType.Text);
             await getResponceTask(searchItem,searchYear,searchType);
             MyFilmList.Hide();
-            if (movies.Response=="True") 
-            {
-                GridMain.Visibility = Visibility.Visible;
-              //  BackGroundRectangle.Opacity = 0.1;
-                BackGroundRectangle1.Opacity = 0.2;
-                listBoxMain.Items.Clear();
-                listBoxMain.Items.Add(movies);
-                DisplayPoster();
-                DisplayRanking();
-            }
+            if (movies.Response != "True") return;
+            GridMain.Visibility = Visibility.Visible;
+            BackGroundRectangle1.Opacity = 0.2;
+            listBoxMain.Items.Clear();
+            listBoxMain.Items.Add(movies);
+            DisplayPoster();
+            DisplayRanking();
         }
 
         private async Task<string> getResponceTask(string tittle,string year,string type)
@@ -112,7 +108,6 @@ namespace FetchAPI
 
         private void DisplayPoster()
         {
-            var image = new Image();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
             bitmap.UriSource = new Uri(movies.Poster, UriKind.Absolute);
@@ -136,7 +131,7 @@ namespace FetchAPI
         {
             frame.NavigationService.Navigate(MyFilmList);
             MyFilmList.Show();
-            MyFilmList.gridFilms.ItemsSource = films.Movies.ToList();
+            MyFilmList.gridFilms.ItemsSource = films.ShowSimplified();
         }
 
         private void RateControl_OnValueChanged(object? sender, FunctionEventArgs<double> e)
