@@ -28,26 +28,25 @@ namespace FetchAPI
             context.SaveChanges();
         }
 
-		public Films Show()
-        {
+		public List<Movie> Show()
+		{
+
 			using (Films context = new Films())
 			{
-				var movies = context.Movies;
-
-				return new Films() { Movies = movies };
+				return (from m in context.Movies select m).ToList<Movie>();
 			}
 		}
 
-		public Films FindByYear(string year)
-        {
+		public List<Movie> FindByYear(string year)
+		{
 			using (Films context = new Films())
 			{
-				var movies = context.Movies.Where(m => m.Year == year);
-                return new Films() { Movies = (DbSet<Movie>)movies };
+				return (from m in context.Movies where m.Year == year select m).ToList<Movie>();
 			}
 		}
 
-        public bool Exist(Movie movie)
+
+		public bool Exist(Movie movie)
         {
             return Movies.Any(x => x.Title == movie.Title);
         }
