@@ -28,26 +28,47 @@ namespace FetchAPI
             context.SaveChanges();
         }
 
-		public Films Show()
-        {
+		public List<Movie> Show()
+		{
+
 			using (Films context = new Films())
 			{
-				var movies = context.Movies;
-
-				return new Films() { Movies = movies };
+				return (from m in context.Movies select m).ToList<Movie>();
 			}
 		}
 
-		public Films FindByYear(string year)
-        {
+		public List<Movie> FindBy(string What, string key)
+		{
 			using (Films context = new Films())
 			{
-				var movies = context.Movies.Where(m => m.Year == year);
-                return new Films() { Movies = (DbSet<Movie>)movies };
+				switch (What)
+				{
+					case "Year":
+						return (from m in context.Movies where m.Year == key select m).ToList<Movie>();
+					case "Rated":
+						return (from m in context.Movies where m.Rated == key select m).ToList<Movie>();
+					case "Released":
+						return (from m in context.Movies where m.Released == key select m).ToList<Movie>();
+					case "Runtime":
+						return (from m in context.Movies where m.Runtime == key select m).ToList<Movie>();
+					case "Genre":
+						return (from m in context.Movies where m.Genre == key select m).ToList<Movie>();
+					case "Writer":
+						return (from m in context.Movies where m.Writer == key select m).ToList<Movie>();
+					case "Actors":
+						return (from m in context.Movies where m.Actors == key select m).ToList<Movie>();
+					case "Country":
+						return (from m in context.Movies where m.Country == key select m).ToList<Movie>();
+					case "Awards":
+						return (from m in context.Movies where m.Awards == key select m).ToList<Movie>();
+						default:	
+						return null;
+				}
 			}
 		}
 
-        public bool Exist(Movie movie)
+
+		public bool Exist(Movie movie)
         {
             return Movies.Any(x => x.Title == movie.Title);
         }
