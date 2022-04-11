@@ -7,6 +7,7 @@
       xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="FetchAPI.Pages.Page1"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      hc:ThemeManager.RequestedTheme="Dark"
       Title="Page1">
 
     <Grid>
@@ -18,7 +19,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-
+        
         <Rectangle Name="BackGroundRectangle1"  hc:BorderElement.Circular="False" RadiusX="25" RadiusY="25"  HorizontalAlignment="Left" Height="434" Margin="0,0,0,0"  VerticalAlignment="Center" Width="545" RenderTransformOrigin="0.5,0.55">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -28,7 +29,29 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <DataGrid Name="gridFilms" Opacity="0.8" d:ItemsSource="{Binding}"/> 
+        <DataGrid Name="gridFilms" Opacity="0.8" d:ItemsSource="{Binding}" Margin="0,0,0,80"/>
+        
+        <Button Style="{StaticResource ButtonPrimary}" Click="ButtonShowDetailed_OnClick" Background="#FFB21F1F" Content="Show Detailed List" Name="buttonShowDetailed" HorizontalAlignment="Left" Margin="20,340,0,0" VerticalAlignment="Top"/>
 
+
+        <ComboBox Name="ComboBoxMyList" ItemsSource="{Binding DataList}" Style="{StaticResource ComboBoxExtend}" Margin="200,340,200,0" SelectedIndex="0">
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+            <ComboBoxItem Content="Year"/>
+            <ComboBoxItem Content="Rated"/>
+            <ComboBoxItem Content="Released"/>
+            <ComboBoxItem Content="Runtime"/>
+            <ComboBoxItem Content="Genre"/>
+            <ComboBoxItem Content="Writer"/>
+            <ComboBoxItem Content="Actors"/>
+            <ComboBoxItem Content="Awards"/>
+        </ComboBox>
+        <hc:SearchBar hc:InfoElement.Necessary="True" SearchStarted="SearchBarMyList_OnSearchStarted" Name="SearchBarMyList" HorizontalAlignment="Left" Margin="330,340,0,0" TextWrapping="Wrap" hc:InfoElement.Placeholder="Please enter title"  VerticalAlignment="Top" Width="171"/>
     </Grid>
 </Page>
