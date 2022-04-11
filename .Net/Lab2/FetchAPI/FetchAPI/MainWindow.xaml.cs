@@ -26,9 +26,9 @@ namespace FetchAPI
 {
     public partial class MainWindow
     {
-        private Movie movies { get; set; }
+        public Movie movies { get; set; }
 
-        private Films films { get;}
+        public Films films { get;}
 
         private Page1 MyFilmList { get;}
         public MainWindow()
@@ -142,7 +142,15 @@ namespace FetchAPI
             {
                 var item = films.Movies.SingleOrDefault((x => x.Title == movies.Title));
                 item.UserRating =  RateControl.Value + "/5";
+                films.SaveChanges();
             }
+        }
+
+        private void ButtonShowDetailed_OnClick(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(MyFilmList);
+            MyFilmList.Show();
+            MyFilmList.gridFilms.ItemsSource = films.Show();
         }
     }
 }
