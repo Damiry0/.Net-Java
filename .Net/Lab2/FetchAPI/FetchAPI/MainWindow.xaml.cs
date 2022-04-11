@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Policy;
@@ -14,8 +15,12 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FetchAPI.Pages;
+using HandyControl.Data;
 using Newtonsoft.Json;
 using TextBox = HandyControl.Controls.TextBox;
+using FetchAPI.Pages;
+using HandyControl.Tools.Extension;
 
 namespace FetchAPI
 {
@@ -23,9 +28,16 @@ namespace FetchAPI
     {
 
         public Movie movies { get; set; }
+
+        public Films films { get; set; }
+
+        public Page1 MyFilmList { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            films = new Films();
+            MyFilmList = new Page1();
+            films.SaveChanges();
         }
 
         #region Change Theme
@@ -76,16 +88,14 @@ namespace FetchAPI
             var searchYear = HttpUtility.UrlEncode(TextBoxYear.Text);
             var searchType = HttpUtility.UrlEncode(ComboBoxType.Text);
             await getResponceTask(searchItem,searchYear,searchType);
-            if (movies != null) // TODO broken exception handling
+            MyFilmList.Hide();
+            if (movies.Response=="True") 
             {
                 GridMain.Visibility = Visibility.Visible;
               //  BackGroundRectangle.Opacity = 0.1;
                 BackGroundRectangle1.Opacity = 0.2;
                 listBoxMain.Items.Clear();
                 listBoxMain.Items.Add(movies);
-                var context = new Films();
-                context.Movies.Add(movies);
-                context.SaveChanges();
                 DisplayPoster();
                 DisplayRanking();
             }
@@ -95,7 +105,6 @@ namespace FetchAPI
         {
             var client = new HttpClient();
             string call = $"http://www.omdbapi.com/?t={tittle}&y={year}&type={type}&apikey=82c88151";
-
             var responce = await client.GetStringAsync(call);
             movies = JsonConvert.DeserializeObject<Movie>(responce);
             return responce;
@@ -125,7 +134,20 @@ namespace FetchAPI
 
         private void ButtonShowList_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            frame.NavigationService.Navigate(MyFilmList);
+            MyFilmList.Show();
+            MyFilmList.gridFilms.ItemsSource = films.Movies.ToList();
+        }
+
+        private void RateControl_OnValueChanged(object? sender, FunctionEventArgs<double> e)
+        {
+            movies.UserRating = RateControl.Value + "/5";
+            if(!films.Exist(movies)) films.Add(movies);
+            else
+            {
+                var item = films.Movies.SingleOrDefault((x => x.Title == movies.Title));
+                item.UserRating =  RateControl.Value + "/5";
+            }
         }
     }
 }
