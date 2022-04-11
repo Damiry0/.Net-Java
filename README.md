@@ -47,6 +47,7 @@ Project involved fetching data from WebAPI, parsing it and saving to EF database
 Results are shown down below:
 
 ![photo](https://i.imgur.com/nhcLlrB.png)
+![photo](https://i.imgur.com/aHaUux3.png)
 ## Lab 3
 
 ## Lab 4
