@@ -101,7 +101,7 @@ namespace FetchAPI
                 var item = films.Movies.SingleOrDefault((x => x.Title == movies.Title));
                 listBoxMain.Items.Add(item);
                 var value = item.UserRating.Remove(item.UserRating.Length - 2);
-                RateControl.Value = int.Parse(value);
+                RateControl.Value = float.Parse(value);
             }
             DisplayPoster();
             DisplayRanking();
