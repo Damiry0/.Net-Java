@@ -22,7 +22,7 @@ namespace SpotityStats
         }
         private static void Exiting() => Console.CursorVisible = true;
 
-        internal static async Task<List<TopTracks>> GetTopTracksList()
+        internal static async Task<List<TopTracks>> GetTopTracksList(PersonalizationTopRequest request)
         {
             var json = await File.ReadAllTextAsync(CredentialsPath);
             var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
@@ -34,10 +34,7 @@ namespace SpotityStats
                 .WithAuthenticator(authenticator);
 
             var spotify = new SpotifyClient(config);
-            var topTracks = await spotify.PaginateAll(await spotify.Personalization.GetTopTracks(new PersonalizationTopRequest()
-            {
-                TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
-            }));
+            var topTracks = await spotify.PaginateAll(await spotify.Personalization.GetTopTracks(request));
             var topTracksList = new List<TopTracks>();
             foreach (var track in topTracks)
             {
@@ -54,6 +51,63 @@ namespace SpotityStats
             return topTracksList;
         }
 
+        internal static async Task<List<TopArtist>> GetTopArtistsList(PersonalizationTopRequest request)
+        {
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token!);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+                .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+            var topArtists = await spotify.PaginateAll(await spotify.Personalization.GetTopArtists(request));
+            var topArtistsList = new List<TopArtist>();
+            foreach (var artist in topArtists)
+            {
+            
+                topArtistsList.Add(new TopArtist()
+                {
+                    Author = artist.Name,
+                    Photo = artist.Images[0].Url,
+                    Id = artist.Popularity
+                });
+            }
+            _server.Dispose();
+            return topArtistsList;
+        }
+
+        internal static async Task<List<TopArtist>> GetTopGenreList(PersonalizationTopRequest request)
+        {
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token!);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+                .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+            var topArtists = await spotify.PaginateAll(await spotify.Personalization.GetTopArtists(request));
+            var topArtistsList = new List<TopArtist>();
+            foreach (var artist in topArtists)
+            {
+            
+                topArtistsList.Add(new TopArtist()
+                {
+                    Author = artist.Name,
+                    Photo = artist.Images[0].Url,
+                    Id = artist.Popularity
+                });
+            }
+            _server.Dispose();
+            return topArtistsList;
+        }
+
+
 
         internal static async Task StartAuthentication()
         {
@@ -68,7 +122,6 @@ namespace SpotityStats
                 );
 
                 await File.WriteAllTextAsync(CredentialsPath, JsonConvert.SerializeObject(token));
-                await GetTopTracksList();
             };
 
             var request = new LoginRequest(_server.BaseUri, clientId!, LoginRequest.ResponseType.Code)
