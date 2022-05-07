@@ -79,7 +79,36 @@ namespace SpotityStats
             return topArtistsList;
         }
 
-        internal static async Task<List<TopArtist>> GetTopGenreList(PersonalizationTopRequest request)
+        internal static async Task<List<Tracks>> GetRecentTracksList()
+        {
+            var json = await File.ReadAllTextAsync(CredentialsPath);
+            var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
+
+            var authenticator = new PKCEAuthenticator(clientId!, token!);
+            authenticator.TokenRefreshed += (sender, token) => File.WriteAllText(CredentialsPath, JsonConvert.SerializeObject(token));
+
+            var config = SpotifyClientConfig.CreateDefault()
+                .WithAuthenticator(authenticator);
+
+            var spotify = new SpotifyClient(config);
+            var recentTracks = await spotify.PaginateAll(await spotify.Player.GetRecentlyPlayed());
+            var recentTracksList = new List<Tracks>();
+            foreach (var track in recentTracks)
+            {
+            
+                recentTracksList.Add(new Tracks()
+                {
+                    Name = track.Track.Name, 
+                    Artist = track.Track.Artists[0].Name,
+                    PlayedAt = track.PlayedAt.Date
+                });
+            }
+            _server.Dispose();
+            return recentTracksList;
+        }
+
+
+        internal static async Task<List<TopArtist>> GetRecentlyPlayed(PersonalizationTopRequest request)
         {
             var json = await File.ReadAllTextAsync(CredentialsPath);
             var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
