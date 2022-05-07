@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using static SpotifyAPI.Web.Scopes;
 
-namespace SpotityStats.Controlers  
+namespace SpotityStats  
 {
     public static class Spotify
     {
@@ -22,7 +22,7 @@ namespace SpotityStats.Controlers
         }
         private static void Exiting() => Console.CursorVisible = true;
 
-        internal static async Task<List<string>> Start()
+        internal static async Task<List<TopTracks>> GetTopTracksList()
         {
             var json = await File.ReadAllTextAsync(CredentialsPath);
             var token = JsonConvert.DeserializeObject<PKCETokenResponse>(json);
@@ -34,26 +34,24 @@ namespace SpotityStats.Controlers
                 .WithAuthenticator(authenticator);
 
             var spotify = new SpotifyClient(config);
-
-            var me = await spotify.UserProfile.Current();
-      
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine($"Welcome {me.DisplayName} ({me.Id}), you're authenticated!");
-            var playlists = await spotify.PaginateAll(await spotify.Playlists.CurrentUsers().ConfigureAwait(false));
-            Console.WriteLine("Select your desired playlist:");
-            foreach (var (playlist,index) in playlists.WithIndex())
+            var topTracks = await spotify.PaginateAll(await spotify.Personalization.GetTopTracks(new PersonalizationTopRequest()
             {
-                Console.WriteLine($"{index}:{playlist.Name}");
+                TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
+            }));
+            var topTracksList = new List<TopTracks>();
+            foreach (var track in topTracks)
+            {
+            
+                topTracksList.Add(new TopTracks()
+                {
+                    Id = track.TrackNumber,
+                    Title = track.Name,
+                    Author = track.Artists[0].Name,
+                    AlbumCover = track.Album.Images[0].Url,
+                });
             }
-            Console.WriteLine("Playlist number:");
-            var selectedPlaylistNumber = Convert.ToInt32(Console.ReadLine());
-            var selectedPlaylistId = playlists[selectedPlaylistNumber].Id;
-            // if (playlistRequested.Tracks != null)
-            var fullPlaylist = await spotify.PaginateAll(await spotify.Playlists.GetItems(selectedPlaylistId).ConfigureAwait(false));
-            var list = fullPlaylist.Select(line =>
-                $"{((FullTrack)line.Track).Artists[0].Name} {((FullTrack)line.Track).Name} \n").ToList();
             _server.Dispose();
-            return list;
+            return topTracksList;
         }
 
 
@@ -70,7 +68,7 @@ namespace SpotityStats.Controlers
                 );
 
                 await File.WriteAllTextAsync(CredentialsPath, JsonConvert.SerializeObject(token));
-                await Start();
+                await GetTopTracksList();
             };
 
             var request = new LoginRequest(_server.BaseUri, clientId!, LoginRequest.ResponseType.Code)

@@ -2,12 +2,12 @@
 
 namespace SpotityStats.Controlers
 {
-    public class SpotifyController : Controller
+    public class Authentication : Controller
     {
-        [HttpPost]
-        public async Task Authenticate()
+        public async Task<IActionResult> Index()
         {
             await Spotify.StartAuthentication();
+            return View();
         }
     }
 }
