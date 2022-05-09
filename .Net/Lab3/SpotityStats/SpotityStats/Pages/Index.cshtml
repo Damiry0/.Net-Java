@@ -4,20 +4,45 @@
     ViewData["Title"] = "Home page";
 }
 
-<body style="background-color:#b3ffb3;">
-    <img id="mylogo" src="~/logo.jpg" alt="my image logo" class="logo" />
-</body>
+@* <body style="background-color:#b3ffb3;">  not working  *@ 
+@* <img id="mylogo" src="log" alt="my image logo" class="logo" /> *@
+@* </body> *@
+
+<style>
+    .btn {
+        background-color: #1DB954;
+        border: none;
+        color: white;
+        padding: 16px 200px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 4px 2px;
+        opacity: 1;
+        transition: 0.3s;
+        border-radius: 25px
+    }
+
+    .btn:hover {
+        background-color: #179A45
+    }
+</style>
 
 <div class="text-center">
     <h1 style="color:#334d4d" class="display-4">Welcome </h1>
+
     
+
     <h3 style="color:#334d4d">Please login with your spotify account, to see your track or artist ranking! </h3>
+    &nbsp;
+    &nbsp;
     <form asp-page-handler="Print" method="post">
-        <button class="btn btn-default">CLICK ME</button>
+        <button class="btn">Authenticate</button>
     </form>
 
     <form asp-page-handler="delete" method="post">
-        <button class="btn btn-default">Return List</button>
+        <button class="btn btn-default">Test Button</button>
     </form>
 
 </div>
+
