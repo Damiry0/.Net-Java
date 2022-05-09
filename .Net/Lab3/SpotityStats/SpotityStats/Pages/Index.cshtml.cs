@@ -1,17 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SpotifyAPI.Web;
 using SpotityStats.Controlers;
 
 namespace SpotityStats.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public async Task OnPostPrint()
         {
-            _logger = logger;
+            await Spotify.StartAuthentication();
         }
 
+        public async Task OnPostDelete()
+        {
+            await Spotify.GetRecentTracksList();
+        }
+
+        
     }
 }

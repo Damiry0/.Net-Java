@@ -1,11 +1,5 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using System;
-using SpotifyAPI.Web.Auth;
+﻿using SpotifyAPI.Web.Auth;
 using SpotifyAPI.Web;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using static SpotifyAPI.Web.Scopes;
 
@@ -63,16 +57,16 @@ namespace SpotityStats
                 .WithAuthenticator(authenticator);
 
             var spotify = new SpotifyClient(config);
+            var user = await spotify.UserProfile.Current(); // auth works
             var topArtists = await spotify.PaginateAll(await spotify.Personalization.GetTopArtists(request));
             var topArtistsList = new List<TopArtist>();
             foreach (var artist in topArtists)
             {
-            
                 topArtistsList.Add(new TopArtist()
                 {
                     Author = artist.Name,
-                    Photo = artist.Images[0].Url,
-                    Id = artist.Popularity
+                    Id = artist.Popularity,
+                    Photo = artist.Images.FirstOrDefault()?.Url,
                 });
             }
             _server.Dispose();
@@ -99,7 +93,7 @@ namespace SpotityStats
                 recentTracksList.Add(new Tracks()
                 {
                     Name = track.Track.Name, 
-                    Artist = track.Track.Artists[0].Name,
+                    Artist = track.Track.Artists.FirstOrDefault()?.Name,
                     PlayedAt = track.PlayedAt.Date
                 });
             }
@@ -128,7 +122,7 @@ namespace SpotityStats
                 topArtistsList.Add(new TopArtist()
                 {
                     Author = artist.Name,
-                    Photo = artist.Images[0].Url,
+                    Photo = artist.Images.FirstOrDefault()?.Url,
                     Id = artist.Popularity
                 });
             }
@@ -157,7 +151,7 @@ namespace SpotityStats
             {
                 CodeChallenge = challenge,
                 CodeChallengeMethod = "S256",
-                Scope = new List<string> { UserReadEmail, UserReadPrivate, PlaylistReadPrivate, PlaylistReadCollaborative }
+                Scope = new List<string> { UserReadEmail, UserReadPrivate, PlaylistReadPrivate, PlaylistReadCollaborative, UserTopRead, UserReadRecentlyPlayed}
             };
 
             var uri = request.ToUri();

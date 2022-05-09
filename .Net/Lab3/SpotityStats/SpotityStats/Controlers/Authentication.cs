@@ -6,7 +6,7 @@ namespace SpotityStats.Controlers
     {
         public async Task<IActionResult> Index()
         {
-            await Spotify.StartAuthentication();
+            
             return View();
         }
     }
