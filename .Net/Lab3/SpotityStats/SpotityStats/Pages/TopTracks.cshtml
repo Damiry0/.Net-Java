@@ -1,19 +1,127 @@
 ﻿@page
+@using SpotifyAPI.Web
 @model PrivacyModel
 @{
     ViewData["Title"] = "Top Tracks:";
 }
 
-<body style="background-color:#CEFCFF;">
+@* <body style="background-color:#CEFCFF;"> *@
     
-    <h1 style="color:#334d4d">@ViewData["Title"]</h1>
-
-    <ul class=".active">
-    <li><a class="active" href="#home"> Top Last Moth</a></listyle>
-    <li><a href="#news">Top Last 6 Months</a></li>
-    <li><a href="#contact">Top All Time</a></li>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="home">Last 4 weeks</a></li>
+    <li><a data-toggle="tab" href="tab1">Last 6 months</a></li>
+    <li><a data-toggle="tab" href="tab2">All Time</a></li>
 </ul>
-</body>
+
+<div class="tab-content">
+<div id="home">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">AlbumCover</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            var tracklist= await Spotify.GetTopTracksList(new PersonalizationTopRequest()
+            {
+                TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
+            });
+            int i = 1;
+            foreach (var track in tracklist)
+            {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>
+                        <img src="@track.AlbumCover" style="width: 60px; height: 60px;">
+                    </td>
+                    <td>@track.Title</td>
+                    <td>
+                        @track.Author</td>
+                </tr>
+                i++;
+            }
+        }
+    </table>
+</div>
+
+    <div id="tab1">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">AlbumCover</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                var tracklist1= await Spotify.GetTopTracksList(new PersonalizationTopRequest()
+                {
+                    TimeRangeParam = PersonalizationTopRequest.TimeRange.MediumTerm
+                });
+                i = 1;
+                foreach (var track1 in tracklist1)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>
+                            <img src="@track1.AlbumCover" style="width: 60px; height: 60px;">
+                        </td>
+                        <td>@track1.Title</td>
+                        <td>
+                            @track1.Author</td>
+                    </tr>
+                    i++;
+                }
+            }
+        </table>
+    </div>
+    
+    
+    <div id="tab2">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">AlbumCover</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                var tracklist2= await Spotify.GetTopTracksList(new PersonalizationTopRequest()
+                {
+                    TimeRangeParam = PersonalizationTopRequest.TimeRange.LongTerm
+                });
+                i = 1;
+                foreach (var track2 in tracklist2)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>
+                            <img src="@track2.AlbumCover" style="width: 60px; height: 60px;">
+                        </td>
+                        <td>@track2.Title</td>
+                        <td>
+                            @track2.Author</td>
+                    </tr>
+                    i++;
+                }
+            }
+        </table>
+    </div>    
+    
+    
+
+</div>
+
+@* </body> *@
 
 
 
