@@ -1,125 +1,128 @@
 ﻿@page
 @using SpotifyAPI.Web
 @model PrivacyModel
-@{
-    ViewData["Title"] = "Top Tracks:";
-}
+<body>
 
-@* <body style="background-color:#CEFCFF;"> *@
-    
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="home">Last 4 weeks</a></li>
-    <li><a data-toggle="tab" href="tab1">Last 6 months</a></li>
-    <li><a data-toggle="tab" href="tab2">All Time</a></li>
-</ul>
+<div class="container">
+    <h2>Top Tracks</h2>
+    <p>Below you can switch between different time periods.</p>
 
-<div class="tab-content">
-<div id="home">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">AlbumCover</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-        </tr>
-        </thead>
-        <tbody>
-        @{
-            var tracklist= await Spotify.GetTopTracksList(new PersonalizationTopRequest()
-            {
-                TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
-            });
-            int i = 1;
-            foreach (var track in tracklist)
-            {
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#menu1">Last 4 weeks</a></li>
+        <li><a data-toggle="tab" href="#menu2">Last 6 months</a></li>
+        <li><a data-toggle="tab" href="#menu3">All time</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="menu1" class="tab-pane fade">
+            <table class="table table-striped">
+                <thead>
                 <tr>
-                    <th scope="row">@i</th>
-                    <td>
-                        <img src="@track.AlbumCover" style="width: 60px; height: 60px;">
-                    </td>
-                    <td>@track.Title</td>
-                    <td>
-                        @track.Author</td>
+                    <th scope="col">Id</th>
+                    <th scope="col">AlbumCover</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
                 </tr>
-                i++;
-            }
-        }
-    </table>
-</div>
-
-    <div id="tab1">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">AlbumCover</th>
-                <th scope="col">Title</th>
-                <th scope="col">Author</th>
-            </tr>
-            </thead>
-            <tbody>
-            @{
-                var tracklist1= await Spotify.GetTopTracksList(new PersonalizationTopRequest()
-                {
-                    TimeRangeParam = PersonalizationTopRequest.TimeRange.MediumTerm
-                });
-                i = 1;
-                foreach (var track1 in tracklist1)
-                {
-                    <tr>
-                        <th scope="row">@i</th>
-                        <td>
-                            <img src="@track1.AlbumCover" style="width: 60px; height: 60px;">
-                        </td>
-                        <td>@track1.Title</td>
-                        <td>
-                            @track1.Author</td>
-                    </tr>
-                    i++;
+                </thead>
+                <tbody>
+                @{
+                    var tracklist= await Spotify.GetTopTracksList(new PersonalizationTopRequest()
+                    {
+                        TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
+                    });
+                    int i = 1;
+                    foreach (var track in tracklist)
+                    {
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td>
+                                <img src="@track.AlbumCover" style="width: 60px; height: 60px;">
+                            </td>
+                            <td>@track.Title</td>
+                            <td>
+                                @track.Author</td>
+                        </tr>
+                        i++;
+                    }
                 }
-            }
-        </table>
+            </table>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <div id="tab1" class="tab-pane fade">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">AlbumCover</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var tracklist1= await Spotify.GetTopTracksList(new PersonalizationTopRequest()
+                        {
+                            TimeRangeParam = PersonalizationTopRequest.TimeRange.MediumTerm
+                        });
+                        i = 1;
+                        foreach (var track1 in tracklist1)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>
+                                    <img src="@track1.AlbumCover" style="width: 60px; height: 60px;">
+                                </td>
+                                <td>@track1.Title</td>
+                                <td>
+                                    @track1.Author</td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+            <div id="tab2">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">AlbumCover</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var tracklist2= await Spotify.GetTopTracksList(new PersonalizationTopRequest()
+                        {
+                            TimeRangeParam = PersonalizationTopRequest.TimeRange.LongTerm
+                        });
+                        i = 1;
+                        foreach (var track2 in tracklist2)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>
+                                    <img src="@track2.AlbumCover" style="width: 60px; height: 60px;">
+                                </td>
+                                <td>@track2.Title</td>
+                                <td>
+                                    @track2.Author</td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </table>
+            </div>
+        </div>
     </div>
-    
-    
-    <div id="tab2">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">AlbumCover</th>
-                <th scope="col">Title</th>
-                <th scope="col">Author</th>
-            </tr>
-            </thead>
-            <tbody>
-            @{
-                var tracklist2= await Spotify.GetTopTracksList(new PersonalizationTopRequest()
-                {
-                    TimeRangeParam = PersonalizationTopRequest.TimeRange.LongTerm
-                });
-                i = 1;
-                foreach (var track2 in tracklist2)
-                {
-                    <tr>
-                        <th scope="row">@i</th>
-                        <td>
-                            <img src="@track2.AlbumCover" style="width: 60px; height: 60px;">
-                        </td>
-                        <td>@track2.Title</td>
-                        <td>
-                            @track2.Author</td>
-                    </tr>
-                    i++;
-                }
-            }
-        </table>
-    </div>    
-    
-    
-
 </div>
+
+
+
+</body>
 
 @* </body> *@
 
