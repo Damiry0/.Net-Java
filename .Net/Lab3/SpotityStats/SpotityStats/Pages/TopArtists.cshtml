@@ -3,121 +3,135 @@
 @model SpotityStats.Pages.Shared.SpotifyModel
 @{
     ViewData["Title"] = "Top Artists:";
+    var topArtistsListMediumTerm = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
+    {
+        TimeRangeParam = PersonalizationTopRequest.TimeRange.MediumTerm
+    });
+    var topArtistsListLongTerm = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
+    {
+        TimeRangeParam = PersonalizationTopRequest.TimeRange.LongTerm
+    });
 }
 
 
-<div class="container">
-    <h2>Top Artists</h2>
-    <p>Below you can switch between different time periods.</p>
+
+<main role="main">
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Top Artists</h1>
+        </div>
+    </section>
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#menu1">Last 4 weeks</a></li>
         <li><a data-toggle="tab" href="#menu2">Last 6 months</a></li>
         <li><a data-toggle="tab" href="#menu3">All time</a></li>
     </ul>
-
     <div class="tab-content">
         <div id="menu1" class="tab-pane fade">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">AlbumCover</th>
-                    <th scope="col">Title</th>
-                </tr>
-                </thead>
-                <tbody>
-                @{
-                    var artistsList = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
-                    {
-                        TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
-                    });
-                    int i = 1;
-                    foreach (var listhehe in artistsList)
-                    {
-                        <tr>
-                            <th scope="row">@i</th>
-                            <td>
-                                <img src="@listhehe.Photo" style="width: 60px; height: 60px;">
-                            </td>
-                            <td>@listhehe.Author</td>
-
-                        </tr>
-                        i++;
-                    }
-
-                }
-            </table>
-        </div>
-        <div id="menu2" class="tab-pane fade">
-            <div id="tab1" class="tab-pane fade">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">AlbumCover</th>
-                        <th scope="col">Title</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @{
-                        var artistsList1 = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
-                        {
-                            TimeRangeParam = PersonalizationTopRequest.TimeRange.MediumTerm
-                        });
-                        i = 1;
-                        foreach (var list1 in artistsList1)
-                        {
-                            <tr>
-                                <th scope="row">@i</th>
-                                <td>
-                                    <img src="@list1.Photo" style="width: 60px; height: 60px;">
-                                </td>
-                                <td>@list1.Author</td>
-
-                            </tr>
-                            i++;
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                        @{
+                            int i = 1;
+                            var topArtistsListShortTerm = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
+                            {
+                                TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
+                            });
+                            foreach (var topArtist in topArtistsListShortTerm)
+                            {
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-top" src="@topArtist.Photo" alt="Card image cap">
+                                        <div class="card-body">
+                                            <p class="card-text">@i .@topArtist.Author</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </div>
+                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                i++;
+                            }
                         }
-
-                    }
-                </table>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="menu3" class="tab-pane fade">
-            <div id="tab2">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">AlbumCover</th>
-                        <th scope="col">Title</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @{
-                        var artistsList2 = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
-                        {
-                            TimeRangeParam = PersonalizationTopRequest.TimeRange.LongTerm
-                        });
-                        i = 1;
-                        foreach (var list2 in artistsList2)
-                        {
-                            <tr>
-                                <th scope="row">@i</th>
-                                <td>
-                                    <img src="@list2.Photo" style="width: 60px; height: 60px;">
-                                </td>
-                                <td>@list2.Author</td>
-
-                            </tr>
-                            i++;
+        
+        <div id="menu2" class="tab-pane fade">
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                        @{
+                            i = 1;
+                            foreach (var topArtist in topArtistsListMediumTerm)
+                            {
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-top" src="@topArtist.Photo" alt="Card image cap">
+                                        <div class="card-body">
+                                            <p class="card-text">@i .@topArtist.Author</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </div>
+                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                i++;
+                            }
                         }
-
-                    }
-                </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="menu3" class="tab-pane fade">
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                        @{
+                            i = 1;
+                            foreach (var topArtist in topArtistsListLongTerm)
+                            {
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-top" src="@topArtist.Photo" alt="Card image cap">
+                                        <div class="card-body">
+                                            <p class="card-text">@i .@topArtist.Author</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </div>
+                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                i++;
+                            }
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</main>
 
+<script>
+    function updateDiv()
+    { 
+    $( "#here" ).load(window.location.href + " #here" );
+    }
 
+</script>
