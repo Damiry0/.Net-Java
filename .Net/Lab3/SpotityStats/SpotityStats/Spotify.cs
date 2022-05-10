@@ -94,7 +94,7 @@ namespace SpotityStats
                 {
                     Name = track.Track.Name, 
                     Artist = track.Track.Artists.FirstOrDefault()?.Name,
-                    PlayedAt = track.PlayedAt.Date
+                    PlayedAt = track.PlayedAt.Date + track.PlayedAt.TimeOfDay
                 });
             }
             _server.Dispose();

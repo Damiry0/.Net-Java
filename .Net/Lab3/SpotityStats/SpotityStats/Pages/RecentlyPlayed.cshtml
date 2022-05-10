@@ -3,9 +3,30 @@
 @{
     ViewData["Title"] = "Recently Played:";
 }
-
-
-<body style="background-color:#CEFFD5;">
-    
-    <h1 style="color:#334d4d">@ViewData["Title"]</h1>
-</body>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Track</th>
+        <th scope="col">Artist</th>
+        <th scope="col">Played at</th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        var recentList = await Spotify.GetRecentTracksList();
+        int i = 1;
+        foreach (var track in recentList)
+        {
+            <tr>
+                <th scope="row">@i</th>
+                <td>
+                    @track.Name
+                </td>
+                <td>@track.Artist</td>
+                <td>
+                    @track.PlayedAt.ToString("dd/MM/yyyy HH:mm:ss")</td>
+            </tr>
+            i++;
+        }
+    }
+    </table>

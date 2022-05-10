@@ -1,11 +1,123 @@
 ﻿@page
+@using SpotifyAPI.Web
 @model SpotityStats.Pages.Shared.SpotifyModel
 @{
     ViewData["Title"] = "Top Artists:";
 }
 
 
-<body style="background-color:#CEFFF0;">
-    
-    <h1 style="color:#334d4d">@ViewData["Title"]</h1>
-</body>
+<div class="container">
+    <h2>Top Artists</h2>
+    <p>Below you can switch between different time periods.</p>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#menu1">Last 4 weeks</a></li>
+        <li><a data-toggle="tab" href="#menu2">Last 6 months</a></li>
+        <li><a data-toggle="tab" href="#menu3">All time</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="menu1" class="tab-pane fade">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">AlbumCover</th>
+                    <th scope="col">Title</th>
+                </tr>
+                </thead>
+                <tbody>
+                @{
+                    var artistsList = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
+                    {
+                        TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
+                    });
+                    int i = 1;
+                    foreach (var listhehe in artistsList)
+                    {
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td>
+                                <img src="@listhehe.Photo" style="width: 60px; height: 60px;">
+                            </td>
+                            <td>@listhehe.Author</td>
+
+                        </tr>
+                        i++;
+                    }
+
+                }
+            </table>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <div id="tab1" class="tab-pane fade">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">AlbumCover</th>
+                        <th scope="col">Title</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var artistsList1 = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
+                        {
+                            TimeRangeParam = PersonalizationTopRequest.TimeRange.MediumTerm
+                        });
+                        i = 1;
+                        foreach (var list1 in artistsList1)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>
+                                    <img src="@list1.Photo" style="width: 60px; height: 60px;">
+                                </td>
+                                <td>@list1.Author</td>
+
+                            </tr>
+                            i++;
+                        }
+
+                    }
+                </table>
+            </div>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+            <div id="tab2">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">AlbumCover</th>
+                        <th scope="col">Title</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var artistsList2 = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
+                        {
+                            TimeRangeParam = PersonalizationTopRequest.TimeRange.LongTerm
+                        });
+                        i = 1;
+                        foreach (var list2 in artistsList2)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>
+                                    <img src="@list2.Photo" style="width: 60px; height: 60px;">
+                                </td>
+                                <td>@list2.Author</td>
+
+                            </tr>
+                            i++;
+                        }
+
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
