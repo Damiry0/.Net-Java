@@ -67,6 +67,8 @@ namespace SpotityStats
                     Author = artist.Name,
                     Id = artist.Popularity,
                     Photo = artist.Images.FirstOrDefault()?.Url,
+                    Popularity = artist.Followers.Total.ToString(),
+                    ArtistsProfile = artist.ExternalUrls.FirstOrDefault().Value
                 });
             }
             _server.Dispose();
