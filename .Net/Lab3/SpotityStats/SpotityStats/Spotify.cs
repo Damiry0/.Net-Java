@@ -39,6 +39,7 @@ namespace SpotityStats
                     Title = track.Name,
                     Author = track.Artists[0].Name,
                     AlbumCover = track.Album.Images[0].Url,
+                    Url = track.ExternalUrls.SingleOrDefault().Value
                 });
             }
             _server.Dispose();
