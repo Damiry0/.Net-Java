@@ -73,10 +73,21 @@ namespace SpotityStats
         }
 
 
-        // internal static async Task GetTopGenres(PersonalizationTopRequest request)
-        // {
-        //
-        // }
+        internal static async Task<Dictionary<string,int>> GetTopGenres(PersonalizationTopRequest request)
+        {
+            var spotify = await LoginClient();
+            var topArtists = await spotify.PaginateAll(await spotify.Personalization.GetTopArtists(request));
+            var allGenres = new List<string>();
+            foreach (var topTrack in topArtists)
+            {
+                allGenres.AddRange(topTrack.Genres);
+            }
+            var countedGenres = allGenres.GroupBy(x => x)
+                .ToDictionary(x => x.Key, x => x.Count());
+            var ordered = countedGenres.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            return ordered;
+
+        }
 
         private static async Task<SpotifyClient> LoginClient()
         {
