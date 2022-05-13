@@ -50,6 +50,14 @@ Results are shown down below:
 ![photo](https://i.imgur.com/aHaUux3.png)
 ## Lab 3
 
+Project involved creating website simple ASP.Net website. Website after authentication using OAuth 2.0 shows different user statistics from Spotify e.g Top Artists, Top Tracks, Top Genres and more. Backend was made using [SpotifyAPI-NET](https://github.com/JohnnyCrazy/SpotifyAPI-NET) and frontend using combination of razor pages with [Bootsrap](https://getbootstrap.com/). Website is still being finalized before deployment to live servers, but early results are shown down below:
+![photo](https://i.imgur.com/j9Xlfra.png)
+![photo](https://i.imgur.com/TNtS4xM.png)
+![photo](https://i.imgur.com/9iGOi7U.png)
+
+
+
+
 ## Lab 4
 
 # Java 
