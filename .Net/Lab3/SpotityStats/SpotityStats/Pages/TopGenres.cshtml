@@ -1,12 +1,63 @@
 ﻿@page
+@using SpotifyAPI.Web
 @model SpotityStats.Pages.TopGenresModel
 @{
     ViewData["Title"] = "Top Genres:";
+    var topGenresShortTerm = await Spotify.GetTopGenres(new PersonalizationTopRequest()
+    {
+        TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
+    });
+    var topGenresMediumTerm = await Spotify.GetTopGenres(new PersonalizationTopRequest()
+    {
+        TimeRangeParam = PersonalizationTopRequest.TimeRange.MediumTerm
+    });
+    var topGenresLongTerm = await Spotify.GetTopGenres(new PersonalizationTopRequest()
+    {
+        TimeRangeParam = PersonalizationTopRequest.TimeRange.LongTerm
+    });
+}
+
+@{
+    <section class="jumbotron text-center" >
+        <div class="flex-wrap">
+            <div class="container">
+                <h1 class="jumbotron-heading" >Top Genres</h1>
+            </div>
+            <hr class="my-4">
+            <p> Select interesting you time frame</p>
+        </div>
+    </section>
+
+    <ul class="nav nav-tabs">
+        <li class="active"> <a data-toggle="tab" href="#menu1">Last 4 weeks</a></li>
+        <li><a data-toggle="tab" href="#menu2">Last 6 months</a></li>
+        <li><a data-toggle="tab" href="#menu3">All time</a></li>
+    </ul>
+
+
+    <div class="tab-content carousel-fade">
+        <div id="menu1" class="tab-pane fade">
+            @{
+                for (int index = 0; index < 10; index++) {
+                    var item = topGenresShortTerm.ElementAt(index);
+                    var itemKey = item.Key;
+                    var itemValue = item.Value;
+
+                    <div class="progress" style="height: 20px;">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="@itemValue.ToString()" aria-valuemin="0" aria-valuemax="37"> @itemKey</div>
+                    </div>
+                }
+
+            }
+        </div>
+    </div>
+
+
+    
+
+
+
 }
 
 
-<body style="background-color:#CEFFE6;">
-    
-    <h1 style="color:#334d4d">@ViewData["Title"]</h1>
-</body>
 

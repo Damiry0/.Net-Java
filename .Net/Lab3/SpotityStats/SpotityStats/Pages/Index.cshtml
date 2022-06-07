@@ -4,20 +4,51 @@
     ViewData["Title"] = "Home page";
 }
 
-<body style="background-color:#b3ffb3;">
-    <img id="mylogo" src="~/logo.jpg" alt="my image logo" class="logo" />
-</body>
+@* <body style="background-color:#b3ffb3;">  not working  *@ 
+@* <img id="mylogo" src="log" alt="my image logo" class="logo" /> *@
+@* </body> *@
+
+<style>
+    .btn {
+        background-color: #1DB954;
+        border: none;
+        color: white;
+        padding: 16px 200px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 4px 2px;
+        opacity: 1;
+        transition: 0.3s;
+        border-radius: 25px
+    }
+
+    .btn:hover {
+        background-color: #179A45
+    }
+</style>
 
 <div class="text-center">
     <h1 style="color:#334d4d" class="display-4">Welcome </h1>
-    
-    <h3 style="color:#334d4d">Please login with your spotify account, to see your track or artist ranking! </h3>
-    <form asp-page-handler="Print" method="post">
-        <button class="btn btn-default">CLICK ME</button>
-    </form>
 
-    <form asp-page-handler="delete" method="post">
-        <button class="btn btn-default">Return List</button>
+    <h3 style="color:#334d4d">Please login with your spotify account, to see your track or artist ranking! </h3>
+    &nbsp;
+    &nbsp;
+    <form asp-page-handler="Print" method="post">
+        <button class="btn">Authenticate</button>
     </form>
+    
+    
 
 </div>
+&nbsp;
+&nbsp;
+
+<div class="alert alert-warning" role="alert">
+    <strong>Warning!</strong> Application is still in development.
+    If you are interested in contributing feel free to pull request or sent an issue.
+    <svg class="text-decoration-none" onclick="location.href = 'https://github.com/Damiry0/.Net-Java'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+    </svg>
+</div>
+

@@ -1,11 +1,138 @@
 ﻿@page
+@using SpotifyAPI.Web
 @model SpotityStats.Pages.Shared.SpotifyModel
 @{
     ViewData["Title"] = "Top Artists:";
+    var topArtistsListShortTerm = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
+    {
+        TimeRangeParam = PersonalizationTopRequest.TimeRange.ShortTerm
+    });
+    var topArtistsListMediumTerm = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
+    {
+        TimeRangeParam = PersonalizationTopRequest.TimeRange.MediumTerm
+    });
+    var topArtistsListLongTerm = await Spotify.GetTopArtistsList(new PersonalizationTopRequest()
+    {
+        TimeRangeParam = PersonalizationTopRequest.TimeRange.LongTerm
+    });
 }
 
 
-<body style="background-color:#CEFFF0;">
-    
-    <h1 style="color:#334d4d">@ViewData["Title"]</h1>
-</body>
+
+<main role="main">
+
+    <section class="jumbotron text-center" >
+        <div class="flex-wrap">
+            <div class="container">
+                <h1 class="jumbotron-heading" >Top Artists</h1>
+            </div>
+            <hr class="my-4">
+            <p> Select interesting you time frame</p>
+        </div>
+    </section>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#menu1">Last 4 weeks</a></li>
+        <li><a data-toggle="tab" href="#menu2">Last 6 months</a></li>
+        <li><a data-toggle="tab" href="#menu3">All time</a></li>
+    </ul>
+    <div class="tab-content carousel-fade">
+        <div id="menu1" class="tab-pane fade" >
+            <div class="album py-5 bg-light" >
+                <div class="container" >
+                    <div class="row" style="margin-right: 15px;">
+                        @{
+                            int i = 1;
+                            foreach (var topArtist in topArtistsListShortTerm)
+                            {
+                                <div class="col-md-3">
+                                    <div class="card mb-3 box-shadow">
+                                        <img class="card-img-top" src="@topArtist.Photo" alt="Card image cap">
+                                        <div class="card-body">
+                                            <p class="card-text">@i .@topArtist.Author</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button" onclick="location.href = '@topArtist.ArtistsProfile'" class="btn btn-sm btn-outline-secondary">Profile</button>
+                                                </div>
+                                                <small class="text-muted">Followers: @topArtist.Popularity</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                i++;
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="menu2" class="tab-pane fade">
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row" style="margin-right: 15px;">
+                        @{
+                            i = 1;
+                            foreach (var topArtist in topArtistsListMediumTerm)
+                            {
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-top" src="@topArtist.Photo" alt="Card image cap">
+                                        <div class="card-body">
+                                            <p class="card-text">@i .@topArtist.Author</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button" onclick="location.href = '@topArtist.ArtistsProfile'" class="btn btn-sm btn-outline-secondary">Profile</button>
+                                                </div>
+                                                <small class="text-muted">Followers: @topArtist.Popularity</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                i++;
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="menu3" class="tab-pane fade">
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row" style="margin-right: 15px;">
+                        @{
+                            i = 1;
+                            foreach (var topArtist in topArtistsListLongTerm)
+                            {
+                                <div class="col-md-4">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-top" src="@topArtist.Photo" alt="Card image cap">
+                                        <div class="card-body">
+                                            <p class="card-text">@i .@topArtist.Author</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button" onclick="location.href = '@topArtist.ArtistsProfile'" class="btn btn-sm btn-outline-secondary">Profile</button>
+                                                </div>
+                                                <small class="text-muted">Followers: @topArtist.Popularity</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                i++;
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    function updateDiv()
+    { 
+    $( "#here" ).load(window.location.href + " #here" );
+    }
+
+</script>
